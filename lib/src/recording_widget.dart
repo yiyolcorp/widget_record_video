@@ -4,9 +4,10 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_quick_video_encoder_fork/flutter_quick_video_encoder.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_quick_video_encoder_fork/flutter_quick_video_encoder.dart';
+// import 'package:flutter_quick_video_encoder/flutter_quick_video_encoder.dart';
 import 'package:widget_record_video/src/recording_controller.dart';
 import 'package:widget_record_video/src/utils.dart';
 
@@ -55,8 +56,7 @@ class _RecordingWidgetState extends State<RecordingWidget> {
   Directory? tempDir;
 
   Future<void> getImageSize() async {
-    RenderRepaintBoundary boundary =
-        recordKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+    RenderRepaintBoundary boundary = recordKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
     ui.Image image = await boundary.toImage(pixelRatio: 1);
     width = image.width;
     height = image.height;
@@ -114,9 +114,14 @@ class _RecordingWidgetState extends State<RecordingWidget> {
       int startTime = DateTime.now().millisecondsSinceEpoch;
       await getImageSize();
 
+      // debugPrint(
+      //     "[tifler] ##################### width: $width (${width ~/ 2} * 2), height: $height (${height ~/ 2} * 2)");
       await FlutterQuickVideoEncoder.setup(
-        width: (width ~/ 2) * 2,
-        height: (height ~/ 2) * 2,
+        // [[tifler: ios에서 문제가 발생해서 주석처리]]
+        // width: (width ~/ 2) * 2,
+        // height: (height ~/ 2) * 2,
+        width: width,
+        height: height,
         fps: fps,
         videoBitrate: 1000000,
         profileLevel: ProfileLevel.any,
@@ -173,14 +178,12 @@ class _RecordingWidgetState extends State<RecordingWidget> {
 
   Future<Uint8List?> captureWidgetAsRGBA() async {
     try {
-      RenderRepaintBoundary boundary =
-          recordKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+      RenderRepaintBoundary boundary = recordKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
       ui.Image image = await boundary.toImage(pixelRatio: 1);
       width = image.width;
       height = image.height;
 
-      ByteData? byteData =
-          await image.toByteData(format: ui.ImageByteFormat.rawRgba);
+      ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.rawRgba);
       return byteData?.buffer.asUint8List();
     } catch (e) {
       debugPrint(
@@ -190,9 +193,9 @@ class _RecordingWidgetState extends State<RecordingWidget> {
     }
   }
 
-  Future<void> _appendFrames(
-      Uint8List? videoFrame, Uint8List? audioFrame) async {
+  Future<void> _appendFrames(Uint8List? videoFrame, Uint8List? audioFrame) async {
     if (videoFrame != null) {
+      // debugPrint("[tifler] ##################### videoFrame: ${videoFrame.length}");
       await FlutterQuickVideoEncoder.appendVideoFrame(videoFrame);
     } else {
       debugPrint("Error append $videoFrame");
