@@ -12,14 +12,14 @@ dependencies:
     sdk: flutter
   plugin_platform_interface: ^2.0.2
   path_provider: ^2.1.4
-  ffmpeg_kit_flutter_new: ^1.2.1
+  ffmpeg_kit_flutter_new: ^2.0.0
   flutter_quick_video_encoder_fork: ^0.0.1
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+  flutter_lints: ^6.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
