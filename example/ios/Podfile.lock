@@ -1,0 +1,51 @@
+PODS:
+  - ffmpeg_kit_flutter_new (1.0.0):
+    - ffmpeg_kit_flutter_new/full-gpl-lts (= 1.0.0)
+    - Flutter
+  - ffmpeg_kit_flutter_new/full-gpl-lts (1.0.0):
+    - Flutter
+  - Flutter (1.0.0)
+  - flutter_quick_video_encoder_fork (0.0.1):
+    - Flutter
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - video_player_avfoundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - widget_record_video (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - ffmpeg_kit_flutter_new (from `.symlinks/plugins/ffmpeg_kit_flutter_new/ios`)
+  - Flutter (from `Flutter`)
+  - flutter_quick_video_encoder_fork (from `.symlinks/plugins/flutter_quick_video_encoder_fork/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/darwin`)
+  - widget_record_video (from `.symlinks/plugins/widget_record_video/ios`)
+
+EXTERNAL SOURCES:
+  ffmpeg_kit_flutter_new:
+    :path: ".symlinks/plugins/ffmpeg_kit_flutter_new/ios"
+  Flutter:
+    :path: Flutter
+  flutter_quick_video_encoder_fork:
+    :path: ".symlinks/plugins/flutter_quick_video_encoder_fork/ios"
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  video_player_avfoundation:
+    :path: ".symlinks/plugins/video_player_avfoundation/darwin"
+  widget_record_video:
+    :path: ".symlinks/plugins/widget_record_video/ios"
+
+SPEC CHECKSUMS:
+  ffmpeg_kit_flutter_new: fd5914d838ca5791b32805e3b0c545a99ab96c15
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_quick_video_encoder_fork: e2b26328560adc9fd533836aa01da74a2161f158
+  path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
+  video_player_avfoundation: 2cef49524dd1f16c5300b9cd6efd9611ce03639b
+  widget_record_video: 35534dbef7ef4e4d3bc9f0bb2c43227bac29ee2e
+
+PODFILE CHECKSUM: e30f02f9d1c72c47bb6344a0a748c9d268180865
+
+COCOAPODS: 1.16.2
