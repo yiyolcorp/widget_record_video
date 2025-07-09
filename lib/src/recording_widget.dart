@@ -19,6 +19,8 @@ class RecordingWidget extends StatefulWidget {
     this.limitTime = 120,
     required this.onComplete,
     this.outputPath,
+    this.fps = 30,
+    this.videoBitrate = 1000000,
   });
 
   /// This is the widget you want to record the screen
@@ -37,13 +39,17 @@ class RecordingWidget extends StatefulWidget {
   /// [outputPath] output address of the video, make sure you have write permission to this location otherwise leave it null, it will automatically be saved to app cache
   final String? outputPath;
 
+  /// [fps] is the fps of the video, its default value is 30
+  final int fps;
+
+  /// [videoBitrate] is the video bitrate of the video, its default value is 1000000
+  final int videoBitrate;
+
   @override
   State<RecordingWidget> createState() => _RecordingWidgetState();
 }
 
 class _RecordingWidgetState extends State<RecordingWidget> {
-  static const int fps = 30;
-
   @override
   void initState() {
     super.initState();
@@ -122,8 +128,8 @@ class _RecordingWidgetState extends State<RecordingWidget> {
         // height: (height ~/ 2) * 2,
         width: width,
         height: height,
-        fps: fps,
-        videoBitrate: 1000000,
+        fps: widget.fps,
+        videoBitrate: widget.videoBitrate,
         profileLevel: ProfileLevel.any,
         audioBitrate: 0,
         audioChannels: 0,
@@ -160,7 +166,8 @@ class _RecordingWidgetState extends State<RecordingWidget> {
 
       await FlutterQuickVideoEncoder.finish();
       int endTime = DateTime.now().millisecondsSinceEpoch;
-      int videoTime = ((endTime - startTime) / 1000).round() - 1;
+      debugPrint("endTime - startTime: ${endTime - startTime}");
+      double videoTime = (endTime - startTime) / 1000;
       debugPrint("video time: $videoTime");
 
       var resultPath = await Ultis.adjustVideoSpeed(
