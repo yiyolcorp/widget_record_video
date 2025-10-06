@@ -4,17 +4,16 @@ version: 0.0.4
 homepage: https://github.com/kullhy/widget_record_video
 
 environment:
-  sdk: '>=3.3.3 <4.0.0'
-  flutter: '>=3.3.0'
+  sdk: ">=3.3.3 <4.0.0"
+  flutter: ">=3.3.0"
 
 dependencies:
   flutter:
     sdk: flutter
   plugin_platform_interface: ^2.0.2
   path_provider: ^2.1.4
-  ffmpeg_kit_flutter_new: ^2.0.0
+  ffmpeg_kit_flutter_new: ^3.2.0
   flutter_quick_video_encoder_fork: ^0.0.1
-
 
 dev_dependencies:
   flutter_test:
