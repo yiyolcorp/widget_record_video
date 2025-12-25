@@ -140,12 +140,31 @@ class _RecordingWidgetState extends State<RecordingWidget> {
       Completer<void> readyForMore = Completer<void>();
       readyForMore.complete();
 
+      // 정확한 프레임 타이밍 제어를 위한 변수
+      final frameDurationMicros = (1000000 / widget.fps).round();
+      final frameDuration = Duration(microseconds: frameDurationMicros);
+      var nextFrameTime = DateTime.now();
+
       while (isRecording) {
         Uint8List? videoFrame;
         Uint8List? audioFrame;
 
         if (!isPauseRecord) {
+          final now = DateTime.now();
+
+          // 다음 프레임 시간까지 대기 (정확한 fps 유지)
+          if (now.isBefore(nextFrameTime)) {
+            await Future.delayed(nextFrameTime.difference(now));
+          }
+
           videoFrame = await captureWidgetAsRGBA();
+          nextFrameTime = nextFrameTime.add(frameDuration);
+
+          // 캡처가 너무 느려서 다음 프레임 시간을 놓친 경우 보정
+          final afterCapture = DateTime.now();
+          if (afterCapture.isAfter(nextFrameTime)) {
+            nextFrameTime = afterCapture;
+          }
 
           await readyForMore.future;
           readyForMore = Completer<void>();
